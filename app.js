@@ -30,3 +30,22 @@ list.addEventListener('click', e => {
     e.target.parentElement.remove();
   }
 });
+
+// Search and Filtering todos
+const search = document.querySelector('.search input');
+
+const filterTodos = term => {
+  Array.from(list.children)
+    .filter(todo => !todo.textContent.toLowerCase().includes(term))
+    .forEach(todo => todo.classList.add('filtered'));
+
+  Array.from(list.children)
+    .filter(todo => todo.textContent.toLowerCase().includes(term))
+    .forEach(todo => todo.classList.remove('filtered'));
+};
+
+search.addEventListener('keyup', e => {
+  const text = search.value.trim().toLowerCase();
+
+  filterTodos(text);
+});
